@@ -4,7 +4,6 @@ function git_prompt {
     fi
 }
 
-# Prompt setup
 setopt PROMPT_SUBST
     
 RPROMPT="\$(git_prompt)"
@@ -13,4 +12,4 @@ if [[ "$EUID" -eq 0 ]]; then
     RPROMPT="%K{red} WARNING: Running as root %k"
 fi
 
-PROMPT="%F{#ffcc73} %~ ->%f "
+PROMPT="%F{cyan} %~ %B➜%b%f "

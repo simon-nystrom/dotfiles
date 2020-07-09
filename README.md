@@ -5,14 +5,8 @@ Personal repository showing my mac setup and how to attain it.
 ## Install development tools
 `xcode-select --install`
 
-## Install Homebrew
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
-
-## Install a more recent version of zsh
-`brew install zsh`
-
-## Install a more recent version of git
-`brew install git`
+## Install Homebrew and some packages
+`./brew.sh`
 
 ## Add zsh as a valid login shell
 `echo /usr/local/bin/zsh | sudo tee -a /etc/shells > /dev/null`
@@ -27,6 +21,7 @@ Personal repository showing my mac setup and how to attain it.
 ```
 mkdir ~/.zsh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
+ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/prompt.sh ~/.zsh/prompt.sh
 ln -s ~/dotfiles/alias.sh ~/.zsh/alias.sh
 ```
