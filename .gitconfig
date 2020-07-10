@@ -1,8 +1,21 @@
 [include]
       path = ~/.gitconfig_local
 
+[core]
+  excludesFile = ~/.gitignore
+
 [color "status"]
     
 	added = yellow
 	changed = green
 	untracked = cyan
+
+[alias]
+	c = commit -m
+	ca = commit -am
+	co = checkout
+	p = push
+
+
+[fetch]
+  prune = true
