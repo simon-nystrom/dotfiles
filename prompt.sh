@@ -1,9 +1,11 @@
 function git_prompt {
     if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = true ]]; then
-        local git_status=$(git status -s)
-        local modified="$(echo $git_status | wc -l)"
-        echo $modified
-        # echo "%F{blue}(%f%F{red}$(git rev-parse --abbrev-ref HEAD)%f""%F{blue})%f"
+        local git_status=$(git status --porcelain | wc -l)
+        # echo $git_status
+        local sign=$([[ $git_status -eq 0 ]] && echo "%F{green}✔%f" || echo "%F{red}✗%f")
+        # echo $sign
+        # echo $git_status
+        echo "%F{cyan}git:($(git rev-parse --abbrev-ref HEAD))%f $sign"
     fi
 }
 
@@ -16,5 +18,6 @@ if [[ "$EUID" -eq 0 ]]; then
 fi
 
 # ✓
+
 # PROMPT="%F{#5ff967}%~ %f%F{#5ff967}%B➜%b%f "
 PROMPT="%F{#5ff967}%~ %f%F{#5ff967}%B➜%b%f "
