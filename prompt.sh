@@ -1,10 +1,7 @@
 function git_prompt {
     if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = true ]]; then
         local git_status=$(git status --porcelain | wc -l)
-        # echo $git_status
         local sign=$([[ $git_status -eq 0 ]] && echo "%F{green}✔%f" || echo "%F{red}✗%f")
-        # echo $sign
-        # echo $git_status
         echo "%F{cyan}git:($(git rev-parse --abbrev-ref HEAD))%f $sign"
     fi
 }
