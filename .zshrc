@@ -14,10 +14,10 @@ zstyle ':completion:*' list-colors ''
 . /usr/local/bin/z.sh
 
 # Load prompt
-. ~/.zsh/.prompt
+. ~/.zsh/.prompt.sh
 
 # Load aliases 
-. ~/.zsh/.alias
+. ~/.zsh/.alias.sh
 
 # Smarter search that finds the previous/next command that shares the currently typed prefix
 autoload -U up-line-or-beginning-search

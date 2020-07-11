@@ -23,8 +23,8 @@ mkdir ~/.zsh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/.gitignore ~/.gitignore
-ln -s ~/dotfiles/.prompt ~/.zsh/.prompt
-ln -s ~/dotfiles/.alias ~/.zsh/.alias
+ln -s ~/dotfiles/.prompt.sh ~/.zsh/.prompt.sh
+ln -s ~/dotfiles/.alias.sh ~/.zsh/.alias.sh
 ```
 
 ## Setup z command (gets sourced in .zshrc)
