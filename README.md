@@ -21,6 +21,7 @@ Personal repository showing my mac setup and how to attain it.
 ```
 mkdir ~/.zsh
 ln -s ~/dotfiles/.zshrc ~/.zshrc
+ln -s ~/dotfiles/.vimrc ~/.vimrc
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/.gitignore ~/.gitignore
 ln -s ~/dotfiles/.prompt.sh ~/.zsh/.prompt.sh
