@@ -4,8 +4,13 @@
 [core]
   excludesFile = ~/.gitignore
 
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
 [color "status"]
-    
 	added = yellow
 	changed = green
 	untracked = cyan
