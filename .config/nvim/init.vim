@@ -1,8 +1,8 @@
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'w0rp/ale'
 Plug 'junegunn/fzf.vim'
+Plug 'w0rp/ale'
 call plug#end()
 
 set autoindent
@@ -11,6 +11,7 @@ set expandtab
 filetype indent on
 filetype plugin on
 
+set background=dark
 set shiftround
 set shiftwidth=4
 set smarttab
@@ -38,6 +39,8 @@ set cursorline
 set number relativenumber 
 set title
 
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+highlight LineNr ctermfg=DarkGrey 
+highlight PmenuSel ctermfg=Yellow 
 
-map <D-p> :Files<CR>
+map <C-s> :w<CR>
+map <C-p> :Files<CR>
