@@ -14,4 +14,4 @@ if [[ "$EUID" -eq 0 ]]; then
     RPROMPT="%K{red} WARNING: Running as root %k"
 fi
 
-PROMPT="%F{magenta}%~ %f%F{magenta}%B➜%b%f "
+PROMPT="%F{yellow}%~ %f%F{yellow}%B➜%b%f "
