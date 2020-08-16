@@ -1,15 +1,17 @@
 call plug#begin('~/.vim/plugged')
-Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
-Plug 'w0rp/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-vinegar'
+Plug 'sheerun/vim-polyglot'
+Plug 'vimwiki/vimwiki'
 call plug#end()
+
+let mapleader = " "
 
 set background=dark
 let g:gruvbox_contrast_dark = 'dark'
@@ -52,6 +54,13 @@ set title
 let g:netrw_liststyle = 3
 
 map <C-s> :w<CR>
-map <C-p> :GFiles<CR>
+map <C-p> :GFiles?<CR>
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>ac <Plug>(coc-codeaction)
+nmap <leader>qf <Plug>(coc-fix-current)
+nmap <C-c> <Plug>VimwikiToggleListItem
+let g:airline_theme = 'base16_gruvbox_dark_hard'
+let g:SuperTabDefaultCompletionType = "<C-n>"
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
-let g:airline_theme='base16_gruvbox_dark_hard'
+command! -nargs=0 Prettier :CocCommand prettier.formatFile

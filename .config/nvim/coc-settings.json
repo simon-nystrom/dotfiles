@@ -1,0 +1,13 @@
+{
+  //  "tsserver.npm": "/Users/argon/.nvm/versions/node/v14.7.0/bin/npm",
+  "eslint.autoFixOnSave": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "json",
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact"
+  ]
+}
