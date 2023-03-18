@@ -20,7 +20,7 @@ require('lualine').setup {}
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local on_attach = function(_, bufnr)
   -- enable completion triggered by <c-x><c-o>
-                  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- mappings.
   -- see `:help vim.lsp.*` for documentation on any of the below functions
@@ -36,9 +36,18 @@ local on_attach = function(_, bufnr)
 end
 
 require 'lspconfig'.eslint.setup {}
+-- local nvim_lsp = require('nvim_lsp')
+require 'lspconfig'.tailwindcss.setup {
+  init_options = {
+    userLanguages = {
+      elixir = "phoenix-heex",
+      heex = "phoenix-heex",
+    }
+  }
+}
 require 'lspconfig'.elixirls.setup {
   cmd = { 'elixir-ls' },
-  elixirLS = { dialyzerEnabled = true, fetchDeps = false },
+  elixirLS = { dialyzerEnabled = true, fetchDeps = true, enableTestLenses = true },
   on_attach = on_attach,
   capabilities = capabilities
 }
