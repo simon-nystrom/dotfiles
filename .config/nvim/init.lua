@@ -1,6 +1,7 @@
 require('plugins-setup')
 require('simon.options')
 require('simon.keymaps')
+require('simon.plugins.lsp.lsp_general')
 require('simon.plugins.nvim-tree-settings')
 
 -- vim.lsp.set_log_level("debug")
@@ -36,6 +37,10 @@ local on_attach = function(_, bufnr)
 end
 
 require 'lspconfig'.eslint.setup {}
+require 'lspconfig'.pyright.setup {
+  on_attach = LSP_ON_ATTACH 
+}
+
 -- local nvim_lsp = require('nvim_lsp')
 require 'lspconfig'.tailwindcss.setup {
   init_options = {
@@ -48,7 +53,7 @@ require 'lspconfig'.tailwindcss.setup {
 require 'lspconfig'.elixirls.setup {
   cmd = { 'elixir-ls' },
   elixirLS = { dialyzerEnabled = true, fetchDeps = true, enableTestLenses = true },
-  on_attach = on_attach,
+  on_attach = LSP_ON_ATTACH,
   capabilities = capabilities
 }
 -- require'lspconfig'.elixirls.setup( coq.lsp_ensure_capabilities( {cmd = { "/opt/elixir/elixir-ls/language_server.sh" }} ))
