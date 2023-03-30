@@ -16,29 +16,14 @@ vim.cmd [[colorscheme tokyonight-storm]]
 
 -- require('after.plugin.fzf')
 require('lualine').setup {}
+require('gitsigns').setup()
 
 --local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local on_attach = function(_, bufnr)
-  -- enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- mappings.
-  -- see `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  --  vim.keymap.set('n', '<space>d', vim.lsp.buf.type_definition, bufopts)
-  -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  -- vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-end
 
 require 'lspconfig'.eslint.setup {}
+require 'lspconfig'.tsserver.setup {}
 require 'lspconfig'.pyright.setup {
-  on_attach = LSP_ON_ATTACH 
 }
 
 -- local nvim_lsp = require('nvim_lsp')
@@ -53,7 +38,6 @@ require 'lspconfig'.tailwindcss.setup {
 require 'lspconfig'.elixirls.setup {
   cmd = { 'elixir-ls' },
   elixirLS = { dialyzerEnabled = true, fetchDeps = true, enableTestLenses = true },
-  on_attach = LSP_ON_ATTACH,
   capabilities = capabilities
 }
 -- require'lspconfig'.elixirls.setup( coq.lsp_ensure_capabilities( {cmd = { "/opt/elixir/elixir-ls/language_server.sh" }} ))
@@ -99,13 +83,21 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 vim.api.nvim_create_autocmd({ 'bufwritepre' },
-  { pattern = { '*.tsx,*.ts,*.jsx,*.js' }, callback = function() vim.cmd('EslintFixAll') end })
+  {
+    pattern = { '*.tsx,*.ts,*.jsx,*.js' },
+    callback = function()
+      vim.cmd('EslintFixAll')
+      vim.lsp.buf.format()
+    end
+  })
+
+
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = require("nvim-tree.api").tree.open })
 
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   pattern = { '*.lua' },
   callback = function()
-    vim.lsp.buf.format { async = true }
+    vim.lsp.buf.format {}
   end
 })
 
@@ -131,3 +123,10 @@ require 'lspconfig'.lua_ls.setup {
     },
   },
 }
+
+require("neotest").setup({
+  adapters = {
+    require("neotest-elixir"),
+    require("neotest-plenary"),
+  },
+})

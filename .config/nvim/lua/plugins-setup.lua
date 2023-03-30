@@ -14,7 +14,21 @@ require('packer').startup(function(use)
   }
 
   --  use({ "mhanberg/elixir.nvim", requires = { "nvim-lua/plenary.nvim" }})
+  --
+  --
+  use {
+    'lewis6991/gitsigns.nvim' }
 
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "jfpedroza/neotest-elixir",
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-plenary"
+    }
+  }
 
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -24,7 +38,7 @@ require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  use 'hrsh7th/nvim-cmp'
+  use 'hsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
@@ -33,6 +47,8 @@ require('packer').startup(function(use)
   use 'hrsh7th/vim-vsnip'
 
   use 'tpope/vim-commentary'
+  use 'tpope/vim-surround'
+
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 

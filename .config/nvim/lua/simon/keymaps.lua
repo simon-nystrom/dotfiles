@@ -18,9 +18,15 @@ keymap('n', '<leader>p', ':Telescope find_files<CR>', opts)
 keymap('n', '<C-S-p>', ':Telescope commands<CR>', opts)
 keymap('n', '<C-f>', ':Telescope live_grep<CR>', opts)
 
+keymap('n', '<leader>frg', 'viwy:%s/<C-r>"//g<Left><Left>', { noremap = true, silent = false })
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, opts)
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, opts)
 vim.keymap.set('n', '<leader>fb', builtin.buffers, opts)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, opts)
+
+
+
+vim.keymap.set('n', '<leader>rt', function() require('neotest').run.run() end,
+  { noremap = true, silent = true })
