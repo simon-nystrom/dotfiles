@@ -13,11 +13,9 @@ require('packer').startup(function(use)
     tag = 'nightly'                  -- optional, updated every week. (see issue #1193)
   }
 
-  --  use({ "mhanberg/elixir.nvim", requires = { "nvim-lua/plenary.nvim" }})
-  --
-  --
   use {
-    'lewis6991/gitsigns.nvim' }
+    'lewis6991/gitsigns.nvim'
+  }
 
   use {
     "nvim-neotest/neotest",
@@ -38,7 +36,7 @@ require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  use 'hsh7th/nvim-cmp'
+  use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'

@@ -12,7 +12,7 @@ vim.opt.smartcase = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.ignorecase = true
-vim.opt.updatetime = 100
+vim.opt.updatetime = 50
 vim.opt.numberwidth = 3
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
@@ -20,3 +20,6 @@ vim.opt.wrap = false
 vim.opt.undofile = true
 vim.opt.swapfile = false
 vim.opt.colorcolumn = "80"
+
+
+vim.opt.incsearch = true

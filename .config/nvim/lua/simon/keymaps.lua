@@ -1,32 +1,34 @@
-local opts = { noremap = true, silent = true }
-
-local term_opts = { silent = true }
 vim.g.mapleader = " "
 
-local keymap = vim.api.nvim_set_keymap
+local km = vim.keymap.set
 
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+km("n", "<C-h>", "<C-w>h", { desc = "Window Focus Left" })
+km("n", "<C-j>", "<C-w>j", { desc = "Window Focus Down" })
+km("n", "<C-k>", "<C-w>k", { desc = "Window Focus Up" })
+km("n", "<C-l>", "<C-w>l", { desc = "Window Focus Right" })
 
-keymap('n', '<C-a>', 'gg<S-v>G', opts) -- Select all
+km('n', '<C-a>', 'gg<S-v>G', { desc = "Select All" })
 
--- Telescope
-keymap('n', '<C-p>', ':Telescope git_files<CR>', opts)
-keymap('n', '<leader>p', ':Telescope find_files<CR>', opts)
-keymap('n', '<C-S-p>', ':Telescope commands<CR>', opts)
-keymap('n', '<C-f>', ':Telescope live_grep<CR>', opts)
-
-keymap('n', '<leader>frg', 'viwy:%s/<C-r>"//g<Left><Left>', { noremap = true, silent = false })
+km('n', '<leader>rw', 'viwy:%s/<C-r>"//g<Left><Left>', { silent = false, desc = "Replace Word in File" })
+km('v', '<leader>rr', ':s//g<Left><Left>', { silent = false })
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, opts)
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, opts)
-vim.keymap.set('n', '<leader>fb', builtin.buffers, opts)
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, opts)
+km('n', '<leader>ff', builtin.find_files)
+km('n', '<leader>fg', builtin.live_grep)
+km('n', '<leader>fb', builtin.buffers)
+km('n', '<leader>ft', builtin.help_tags)
+km('n', '<leader>fs', builtin.spell_suggest)
+km('n', '<leader>fr', builtin.registers)
+km('n', '<leader>fc', builtin.commands)
+km('n', '<leader>fh', builtin.command_history)
+km('n', '<leader>fd', builtin.diagnostics)
+
+km('n', '<leader>tr', function() require('neotest').run.run() end)
+
+km('n', '<leader>s', ':w<CR>', { silent = false })
 
 
-
-vim.keymap.set('n', '<leader>rt', function() require('neotest').run.run() end,
-  { noremap = true, silent = true })
+km('n', '<C-d>', '<C-d>zz')
+km('n', '<C-u>', '<C-u>zz')
+km('n', 'n', 'nzzzv')
+km('n', 'N', 'Nzzzv')

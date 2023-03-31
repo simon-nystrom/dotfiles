@@ -4,15 +4,11 @@ require('simon.keymaps')
 require('simon.plugins.lsp.lsp_general')
 require('simon.plugins.nvim-tree-settings')
 
--- vim.lsp.set_log_level("debug")
-
 
 vim.o.completeopt = "menu,menuone,noselect"
 
 vim.cmd [[colorscheme tokyonight-storm]]
 
-
---vim.keymap.set('n', ':NvimTreeToggle<CR>', opts)
 
 -- require('after.plugin.fzf')
 require('lualine').setup {}

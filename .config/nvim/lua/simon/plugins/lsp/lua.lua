@@ -1,8 +1,6 @@
 require('lsp_general')
 
-
 require 'lspconfig'.lua_ls.setup {
-  on_attach = LSP_ON_ATTACH,
   settings = {
     Lua = {
       runtime = {
