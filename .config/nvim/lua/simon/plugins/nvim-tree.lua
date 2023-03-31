@@ -5,3 +5,5 @@ require("nvim-tree").setup({ remove_keymaps = { "<C-e>" } })
 
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', '<C-e>', ':NvimTreeFindFileToggle<CR>', opts)
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = require("nvim-tree.api").tree.open })

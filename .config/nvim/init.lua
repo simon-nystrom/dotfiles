@@ -1,9 +1,12 @@
 require('plugins-setup')
 require('simon.options')
 require('simon.keymaps')
+require('simon.plugins.nvim-tree')
 require('simon.plugins.lsp.lsp_general')
-require('simon.plugins.nvim-tree-settings')
 require('simon.plugins.lsp.lua')
+require('simon.plugins.lsp.jsts')
+require('simon.plugins.lsp.tailwind')
+require('simon.plugins.lsp.elixir')
 
 
 vim.o.completeopt = "menu,menuone,noselect"
@@ -14,27 +17,10 @@ vim.cmd [[colorscheme tokyonight-storm]]
 require('lualine').setup {}
 require('gitsigns').setup()
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- require 'lspconfig'.eslint.setup {}
+-- require 'lspconfig'.tsserver.setup {}
+require 'lspconfig'.pyright.setup {}
 
-require 'lspconfig'.eslint.setup {}
-require 'lspconfig'.tsserver.setup {}
-require 'lspconfig'.pyright.setup {
-}
-
-require 'lspconfig'.tailwindcss.setup {
-  init_options = {
-    userLanguages = {
-      elixir = "phoenix-heex",
-      heex = "phoenix-heex",
-    }
-  }
-}
-
-require 'lspconfig'.elixirls.setup {
-  cmd = { 'elixir-ls' },
-  elixirLS = { dialyzerEnabled = true, fetchDeps = true, enableTestLenses = true },
-  capabilities = capabilities
-}
 
 require 'nvim-treesitter.configs'.setup {
   -- a list of parser names, or "all"
@@ -76,24 +62,7 @@ require 'nvim-treesitter.configs'.setup {
   },
 }
 
-vim.api.nvim_create_autocmd({ 'bufwritepre' },
-  {
-    pattern = { '*.tsx,*.ts,*.jsx,*.js' },
-    callback = function()
-      vim.cmd('EslintFixAll')
-      vim.lsp.buf.format()
-    end
-  })
 
-
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = require("nvim-tree.api").tree.open })
-
-vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  pattern = { '*.lua' },
-  callback = function()
-    vim.lsp.buf.format {}
-  end
-})
 
 require("neotest").setup({
   adapters = {

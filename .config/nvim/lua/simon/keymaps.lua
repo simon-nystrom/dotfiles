@@ -30,5 +30,5 @@ km('n', '<leader>s', ':w<CR>', { silent = false })
 
 km('n', '<C-d>', '<C-d>zz')
 km('n', '<C-u>', '<C-u>zz')
-km('n', 'n', 'nzzzv')
-km('n', 'N', 'Nzzzv')
+km('n', 'n', 'nzz')
+km('n', 'N', 'Nzz')
