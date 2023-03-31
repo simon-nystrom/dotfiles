@@ -1,5 +1,3 @@
-require('lsp_general')
-
 require 'lspconfig'.lua_ls.setup {
   settings = {
     Lua = {

@@ -3,6 +3,7 @@ require('simon.options')
 require('simon.keymaps')
 require('simon.plugins.lsp.lsp_general')
 require('simon.plugins.nvim-tree-settings')
+require('simon.plugins.lsp.lua')
 
 
 vim.o.completeopt = "menu,menuone,noselect"
@@ -10,11 +11,9 @@ vim.o.completeopt = "menu,menuone,noselect"
 vim.cmd [[colorscheme tokyonight-storm]]
 
 
--- require('after.plugin.fzf')
 require('lualine').setup {}
 require('gitsigns').setup()
 
---local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 require 'lspconfig'.eslint.setup {}
@@ -22,7 +21,6 @@ require 'lspconfig'.tsserver.setup {}
 require 'lspconfig'.pyright.setup {
 }
 
--- local nvim_lsp = require('nvim_lsp')
 require 'lspconfig'.tailwindcss.setup {
   init_options = {
     userLanguages = {
@@ -31,16 +29,16 @@ require 'lspconfig'.tailwindcss.setup {
     }
   }
 }
+
 require 'lspconfig'.elixirls.setup {
   cmd = { 'elixir-ls' },
   elixirLS = { dialyzerEnabled = true, fetchDeps = true, enableTestLenses = true },
   capabilities = capabilities
 }
--- require'lspconfig'.elixirls.setup( coq.lsp_ensure_capabilities( {cmd = { "/opt/elixir/elixir-ls/language_server.sh" }} ))
--- require'lspconfig'.tsserver.setup{}
+
 require 'nvim-treesitter.configs'.setup {
   -- a list of parser names, or "all"
-  ensure_installed = { "javascript", "python", "lua" },
+  ensure_installed = { "javascript", "python", "lua", "elixir" },
 
   -- install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -96,29 +94,6 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     vim.lsp.buf.format {}
   end
 })
-
-require 'lspconfig'.lua_ls.setup {
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
 
 require("neotest").setup({
   adapters = {
