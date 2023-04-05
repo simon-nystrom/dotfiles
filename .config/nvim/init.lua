@@ -8,8 +8,7 @@ require('simon.plugins.lsp.jsts')
 require('simon.plugins.lsp.tailwind')
 require('simon.plugins.lsp.elixir')
 
-
-vim.o.completeopt = "menu,menuone,noselect"
+vim.o.completeopt = "menu,menuone"
 
 vim.cmd [[colorscheme tokyonight-storm]]
 
@@ -63,8 +62,10 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 
-
 require("neotest").setup({
+  quickfix = {
+    open = false
+  },
   adapters = {
     require("neotest-elixir"),
     require("neotest-plenary"),

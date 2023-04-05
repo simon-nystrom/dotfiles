@@ -21,5 +21,11 @@ vim.opt.undofile = true
 vim.opt.swapfile = false
 vim.opt.colorcolumn = "80"
 
+vim.opt.laststatus = 3
+vim.opt.showmode = false
 
 vim.opt.incsearch = true
+
+
+vim.opt.fillchars = { eob = " " }
+vim.opt.ruler = false

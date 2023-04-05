@@ -14,8 +14,14 @@ require('packer').startup(function(use)
   }
 
   use {
-    'lewis6991/gitsigns.nvim'
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {}
+    end
   }
+
+  use { 'junegunn/limelight.vim' }
+  use { 'lewis6991/gitsigns.nvim' }
 
   use {
     "nvim-neotest/neotest",
@@ -43,9 +49,12 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/vim-vsnip-integ'
 
   use 'tpope/vim-commentary'
   use 'tpope/vim-surround'
+
+
 
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -57,14 +66,34 @@ require('packer').startup(function(use)
         vim.fn["vsnip#anonymous"](args.body)
       end,
     },
+    completion = { completeopt = 'menu,menone,noinsert' },
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered()
+    },
     mapping = cmp.mapping.preset.insert({
-      ['<C-p>'] = cmp.mapping.select_prev_item(),
-      ['<C-n>'] = cmp.mapping.select_next_item(),
-      ['<CR>']  = cmp.mapping.confirm({ select = true }),
-      ['<C-b>'] = cmp.mapping.complete()
+      ['<C-p>']   = cmp.mapping.select_prev_item(),
+      ['<C-n>']   = cmp.mapping.select_next_item(),
+      ['<CR>']    = cmp.mapping.confirm({ select = true }),
+      ['<C-b>']   = cmp.mapping.complete(),
+      ['<Tab>']   = cmp.mapping(function(fallback)
+        if (cmp.visible()) then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
+      ['<S-Tab>'] = cmp.mapping(function(fallback)
+        if (cmp.visible()) then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end, { "i", "s" })
     }),
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
+      { name = 'nvim_lsp', auto_select = true },
+      { name = 'vsnip',    auto_select = true },
     }, {
       { name = "buffer" },
     })
