@@ -1,6 +1,5 @@
 -- Configuration for JavaScript and TypeScript
 
-
 require 'lspconfig'.eslint.setup { capabilities = LSP_CAPABILITIES }
 require 'lspconfig'.tsserver.setup { capabilities = LSP_CAPABILITIES, handlers = LSP_HANDLERS }
 

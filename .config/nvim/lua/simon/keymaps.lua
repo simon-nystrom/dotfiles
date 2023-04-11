@@ -26,9 +26,18 @@ km('n', '<leader>fd', builtin.diagnostics)
 km('n', '<leader>tr', function() require('neotest').run.run() end)
 
 km('n', '<leader>s', ':w<CR>', { silent = false })
+km('n', '<leader>q', ':q<CR>')
 
 
 km('n', '<C-d>', '<C-d>zz')
 km('n', '<C-u>', '<C-u>zz')
 km('n', 'n', 'nzz')
 km('n', 'N', 'Nzz')
+
+km('n', '<leader>xx', '<cmd>TroubleToggle<cr>')
+
+
+km('n', '<leader>zen', function()
+  vim.cmd('ZenMode')
+  vim.cmd('Limelight!!')
+end)
