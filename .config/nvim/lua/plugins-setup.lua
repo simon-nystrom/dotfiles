@@ -67,7 +67,8 @@ require('packer').startup(function(use)
   use 'tpope/vim-surround'
 
 
-
+  use 'echasnovski/mini.jump2d'
+  use 'echasnovski/mini.pairs'
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 

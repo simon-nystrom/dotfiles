@@ -15,6 +15,9 @@ vim.cmd [[colorscheme tokyonight-storm]]
 require('lualine').setup {}
 require('gitsigns').setup()
 
+require('mini.jump2d').setup()
+require('mini.pairs').setup()
+
 require 'lspconfig'.pyright.setup {}
 
 require 'nvim-treesitter.configs'.setup {
@@ -33,7 +36,6 @@ require 'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
-
 
 require("neotest").setup({
   quickfix = {
