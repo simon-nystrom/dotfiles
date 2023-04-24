@@ -1,48 +1,63 @@
-require('plugins-setup')
-require('simon.options')
-require('simon.keymaps')
-require('simon.plugins.nvim-tree')
-require('simon.plugins.lsp.lsp_general')
-require('simon.plugins.lsp.lua')
-require('simon.plugins.lsp.jsts')
-require('simon.plugins.lsp.tailwind')
-require('simon.plugins.lsp.elixir')
+require("lazy-setup")
+require("options")
+require("keybinds")
+require("lsp.all")
+require("lsp.null")
+require("lsp.lua")
+require("lsp.typescript")
+require("lsp.tailwind")
+require("lsp.elixir")
+require("nvim-tree-settings")
+require("nvim-treesitter-settings")
+require("nvim-cmp-settings")
 
-vim.o.completeopt = "menu,menuone"
+require("gitsigns").setup({})
+require("lualine").setup({})
+require("mini.jump2d").setup()
+require("mini.pairs").setup()
+-- require("noice").setup()
 
-vim.cmd [[colorscheme tokyonight-storm]]
+local function is_git_repository()
+  local handle = io.popen("git rev-parse --is-inside-work-tree 2>/dev/null")
+  if not handle then
+    return false
+  end
 
-require('lualine').setup {}
-require('gitsigns').setup()
+  local result = handle:read("*a")
+  handle:close()
 
-require('mini.jump2d').setup()
-require('mini.pairs').setup()
+  if result:find("true") then
+    return true
+  end
 
-require 'lspconfig'.pyright.setup {}
+  return false
+end
 
-require 'nvim-treesitter.configs'.setup {
-  ensure_installed = { "javascript", "python", "lua", "elixir" },
-  sync_install = false,
-  auto_install = true,
-  highlight = {
-    enable = true,
-    disable = function(_, buf)
-      local max_filesize = 100 * 1024 -- 100 kb
-      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-      if ok and stats and stats.size > max_filesize then
-        return true
-      end
-    end,
-    additional_vim_regex_highlighting = false,
-  },
-}
+local function parse_git_url()
+  local handle = io.popen("git remote get-url origin 2>/dev/null")
 
-require("neotest").setup({
-  quickfix = {
-    open = false
-  },
-  adapters = {
-    require("neotest-elixir"),
-    require("neotest-plenary"),
-  },
-})
+  if not handle then
+    return false
+  end
+
+  local git_url = handle:read("*a")
+  handle:close()
+
+  local regex = "%w+@(.+):(.*).git"
+  local base, path = git_url:match(regex)
+
+  if base and path then
+    local url = string.format("https://%s/%s", base, path)
+    return url
+  else
+    return nil
+  end
+end
+
+local km = vim.keymap.set
+
+if is_git_repository then
+  km("n", "<leader>repo", function()
+    os.execute("open " .. parse_git_url())
+  end)
+end
