@@ -5,6 +5,7 @@ require("lsp.all")
 require("lsp.null")
 require("lsp.lua")
 require("lsp.typescript")
+require("lsp.python")
 require("lsp.tailwind")
 require("lsp.elixir")
 require("nvim-tree-settings")
@@ -15,7 +16,7 @@ require("gitsigns").setup({})
 require("lualine").setup({})
 require("mini.jump2d").setup()
 require("mini.pairs").setup()
--- require("noice").setup()
+require("neotest").setup({ output = { open_on_run = false }, adapters = { require("neotest-elixir")({}) } })
 
 local function is_git_repository()
   local handle = io.popen("git rev-parse --is-inside-work-tree 2>/dev/null")
@@ -61,3 +62,13 @@ if is_git_repository then
     os.execute("open " .. parse_git_url())
   end)
 end
+
+require("lspconfig").rust_analyzer.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      diagnostics = {
+        enable = true,
+      },
+    },
+  },
+})

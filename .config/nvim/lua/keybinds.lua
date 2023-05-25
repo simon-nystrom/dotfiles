@@ -40,18 +40,7 @@ km("n", "√", ":m+1<CR>", { silent = true })
 km("n", "˚", ":m-2<CR>", { silent = true })
 km("n", "ª", ":m-2<CR>", { silent = true })
 
-km("n", "<leader>test", function()
-  -- local buf = vim.api.nvim_get_current_buf()                             -- Get the current buffer
-  -- local text = "Hello, World!"                                           -- Text to be inserted
-  -- local row, col = unpack(vim.api.nvim_win_get_cursor(0))                -- Get cursor position
-  -- local lines = vim.api.nvim_buf_get_lines(buf, row - 1, row, false)     -- Get the line at cursor
-  -- local new_line = lines[1]:sub(0, col) .. text .. lines[1]:sub(col + 1) -- Insert text at cursor
-  -- vim.api.nvim_buf_set_lines(buf, row - 1, row, false, { new_line })
-  --
-  --
-  --
-  --
-
+km("n", "<leader>log", function()
   local buf = vim.api.nvim_get_current_buf()                                                                -- Get the current buffer
   local row = unpack(vim.api.nvim_win_get_cursor(0))                                                        -- Get cursor position
 

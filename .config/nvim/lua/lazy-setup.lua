@@ -56,6 +56,15 @@ require("lazy").setup({
     },
   },
   {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "jfpedroza/neotest-elixir",
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+    },
+  },
+  {
     "nvim-tree/nvim-tree.lua",
     tag = "nightly",
     dependencies = { "nvim-tree/nvim-web-devicons" },
