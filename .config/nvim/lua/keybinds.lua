@@ -9,11 +9,12 @@ km("n", "<C-l>", "<C-w>l", { desc = "Window Focus Right" })
 km("n", "<C-k>", "<C-w>k", { desc = "Window Focus Up" })
 km("n", "<C-a>", "gg<S-v>G", { desc = "Select All" })
 
-km("v", "<leader>rr", ":s//g<Left><Left>", { silent = false })
+km("v", "<leader>rr", ":s/g<Left>", { silent = false })
 km("n", "<leader>rw", 'viwy:%s/<C-r>"//g<Left><Left>', { silent = false, desc = "Replace Word in File" })
 
 local builtin = require("telescope.builtin")
 km("n", "<leader>ff", builtin.find_files)
+km("n", "<leader>fp", ":Telescope projects<CR>")
 km("n", "<leader>fg", builtin.live_grep)
 km("n", "<leader>fb", builtin.buffers)
 km("n", "<leader>ft", builtin.help_tags)

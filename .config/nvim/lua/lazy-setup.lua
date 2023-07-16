@@ -24,6 +24,8 @@ require("lazy").setup({
     end,
   },
 
+  "ahmedkhalf/project.nvim",
+
   "tpope/vim-commentary",
   "tpope/vim-surround",
 
