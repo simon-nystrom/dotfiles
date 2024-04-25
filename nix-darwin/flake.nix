@@ -21,7 +21,13 @@
           pkgs.bat
           pkgs.lua-language-server
           pkgs.wget
-
+          pkgs.nodejs_20
+          pkgs.elixir_1_16
+          pkgs.tldr
+          pkgs.openconnect
+          pkgs.fswatch
+          pkgs.postgresql_15
+          pkgs.kubeseal
         ];
 
       environment.pathsToLink = [ "/share/zsh" ];
@@ -43,9 +49,6 @@
       programs = {
         zsh = {
           enable = true;
-          interactiveShellInit = ''
-            source "${pkgs.autojump}/share/autojump/autojump.zsh"
-          '';
         };
       };
 
@@ -60,6 +63,7 @@
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
     };
+
   in
   {
     # Build darwin flake using:
@@ -73,6 +77,14 @@
           home-manager.useUserPackages = true;
           home-manager.users.simon = import ./home.nix;
           users.users.simon.home = "/Users/simon";
+        }
+        {
+          system.activationScripts.customCommand = {
+            text = ''
+              echo "Running my custom command"
+              # Your custom command here
+            '';
+          };
         }
       ];
     };

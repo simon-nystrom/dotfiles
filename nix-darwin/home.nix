@@ -5,6 +5,8 @@
 
   programs.home-manager.enable = true;
 
+  programs.jq = { enable = true; };
+
   programs.starship = {
     enable = true;
     settings = {
@@ -24,10 +26,16 @@
       java.disabled = true;
       kotlin.disabled = true;
       elixir.disabled = true;
+      docker_context.disabled = true;
+      nodejs.disabled = true;
       character = {
         success_symbol = "[➜](bold green)";
       };
     };
+  };
+
+  programs.k9s = {
+    enable = true;
   };
 
   programs.autojump.enable = true;
@@ -45,7 +53,7 @@
       bind -T copy-mode-vi v send -X begin-selection
       bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
-      set-option -ga terminal-overrides "alacritty:Tc"
+      set-option -ga terminal-overrides ",xterm-256color:Tc"
 
       setw -g automatic-rename on
 
@@ -116,15 +124,16 @@
       z = "j";
       envim = "nvim ~/.config/nvim";
       # Start editing in home.nix file whever we are, but set Neovim cwd to ~/.config/nix-darwin/
-      enix = "nvim ~/.config/nix-darwin/home.nix -c ':cd %:p:h'";
+      enix = "nvim ~/dev/dotfiles/nix-darwin/home.nix -c ':cd %:p:h'";
       mux = "tmuxinator";
       # Very strange ssh behaviour in alacritty without this
       ssh = "TERM=xterm-256color ssh";
     };
 
-    envExtra = lib.concatStrings [ 
+    envExtra = lib.concatStringsSep "\n" [ 
       "export LIVEBOOK_PORT=50000"
       "export BAT_THEME=ansi"
+      "export ERL_AFLAGS='-kernel shell_history enabled'"
     ];
 
     syntaxHighlighting = {
@@ -136,10 +145,12 @@
       url=$(git remote get-url origin | sed -E "s_.*@(.*)\.git_\1_" | sed -E "s/:/\//g" | sed -E "s_^_https://_")
       open "$url"
     }
+    source ~/.mark-secrets.sh
     '';
 
     history = {
-      extended = true;
+      save = 1000000;
+      size = 1000000;
       ignoreAllDups = true;
       ignorePatterns = [ 
         "git reset *" 
