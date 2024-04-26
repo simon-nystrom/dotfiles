@@ -64,6 +64,7 @@
     newSession = true;
     plugins = with pkgs; [
       tmuxPlugins.sensible
+      tmuxPlugins.vim-tmux-navigator
       {
         plugin = tmuxPlugins.catppuccin;
         extraConfig = ''
@@ -146,6 +147,12 @@
       open "$url"
     }
     source ~/.mark-secrets.sh
+    source ~/.vpn.sh
+
+    autoload -U edit-command-line
+    zle -N edit-command-line
+    bindkey -M vicmd v edit-command-line
+
     '';
 
     history = {

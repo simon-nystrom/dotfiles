@@ -28,6 +28,8 @@
           pkgs.fswatch
           pkgs.postgresql_15
           pkgs.kubeseal
+          pkgs.jdk17
+          pkgs.kubectl
         ];
 
       environment.pathsToLink = [ "/share/zsh" ];
@@ -43,6 +45,16 @@
 
       system.defaults = {
         dock.autohide = true;
+        dock.tilesize = 12;
+        dock.orientation = "right";
+	NSGlobalDomain.InitialKeyRepeat = 15;
+	NSGlobalDomain.KeyRepeat = 2;
+	NSGlobalDomain.ApplePressAndHoldEnabled = false;
+      };
+
+      system.keyboard = {
+        enableKeyMapping = true;
+        remapCapsLockToEscape = true;
       };
 
       # Create /etc/zshrc that loads the nix-darwin environment.
@@ -68,15 +80,15 @@
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."thallium" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."carbon" = nix-darwin.lib.darwinSystem {
       modules = [ 
         configuration
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.simon = import ./home.nix;
-          users.users.simon.home = "/Users/simon";
+          home-manager.users.carbon = import ./home.nix;
+          users.users.carbon.home = "/Users/carbon";
         }
         {
           system.activationScripts.customCommand = {
@@ -90,6 +102,6 @@
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."thallium".pkgs;
+    darwinPackages = self.darwinConfigurations."carbon".pkgs;
   };
 }
